@@ -43,3 +43,28 @@ useEffect(() => {
 }, [selectedProject]);
 return {tasks,archivedTasks};
 };
+
+export const useProjects = () => {
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        firebase
+        .firestore()
+        .collection(`projects`)
+        .where(`userId`, `==`, `1234`)
+        .orderBy(`projectId`)
+        .get()
+        .then(snapshot => {
+            const allprojects = snapshot.docs.map(projects => ({
+                ...project.data(),
+                docId: project.id,
+            }));
+
+            if(JSON.stringify(allprojects) !== JSON.stringify(projects)){
+                setProjects(allprojects);
+            }
+        });
+    }, [projects]);
+
+    return {projects, setProjects};
+};
