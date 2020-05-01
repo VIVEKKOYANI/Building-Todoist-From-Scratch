@@ -154,5 +154,20 @@ header{
         max-width: 922px;
         margin: auto;
         height: 44px;
+
+        p, li{
+            color: white;
+        }
+
+        div{
+            &.logo{
+                padding-left: 8px;
+                grid-area: 1/1;
+
+                img{
+                    width: 24px;
+                }
+            }
+        }
     }
 }
